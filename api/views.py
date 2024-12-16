@@ -1,5 +1,9 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from rest_framework import generics  # helps us to create a class that inherits from a generic api view
+from .serializers import RoomSerializer
+from .models import Room
 
-def main(request):
-    return HttpResponse('Hello')
+class RoomView(generics.ListAPIView):
+    query = Room.objects.all()
+    serializer_class = RoomSerializer
+
